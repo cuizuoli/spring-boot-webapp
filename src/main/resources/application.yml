@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.springframework.boot: INFO
+    org.apache.commons: WARN
+    org.apache.ibatis: WARN
+    java.sql: DEBUG
+    java.sql.Statement: DEBUG
+    java.sql.ResultSet: DEBUG
+    com.cuizuoli.example: DEBUG
+
+spring:
+  application:
+    name: dispatcher-server
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test
+    username: root
+    password: 123456
+    max-wait: 5
+    max-active: 5
+    max-idle: 5
+    min-idle: 2
+    initial-size: 1
+    validation-query: SELECT 1
+    test-on-borrow: true
+    test-on-return: false
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.linecorp.lmn.work.model
+  type-handlers-package: com.linecorp.lmn.common.typehandler
+  executor-type: REUSE
